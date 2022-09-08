@@ -139,19 +139,19 @@ class BigO {
   // Binary Search
   //
   User? getFirstByAge(Map<int, User> sortedMap, int age, int min, int max) {
-    if (max >= min) {
-      int mid = ((max + min) / 2).floor();
-
-      if (sortedMap[mid]!.age == age) {
-        return sortedMap[mid] as User;
-      } else if (sortedMap[mid]!.age < age) {
-        getFirstByAge(sortedMap, age, mid + 1, max);
-      } else {
-        getFirstByAge(sortedMap, age, min, mid - 1);
-      }
+    if(max < min) {
+      return null;
     }
+    
+    int mid = ((max + min) ~/ 2);
 
-    return null;
+    if (sortedMap[mid]!.age == age) {
+      return sortedMap[mid] as User;
+    } else if (sortedMap[mid]!.age < age) {
+      return getFirstByAge(sortedMap, age, mid + 1, max);
+    } else {
+      return getFirstByAge(sortedMap, age, min, mid - 1);
+    }
   }
 
   void runFunc(String label, int Function(int) func, int param) {
